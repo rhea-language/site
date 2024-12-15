@@ -13,8 +13,13 @@
         "clean": "rimraf dist"
     },
     "dependencies": {
+        "bootstrap": "^5.3.3",
+        "monaco-editor": "^0.52.2",
+        "monaco-editor-webpack-plugin": "^7.1.0",
         "vue": "^3.5.13",
-        "vue-router": "^4.4.5"
+        "vue-router": "^4.4.5",
+        "xterm": "^5.3.0",
+        "xterm-addon-fit": "^0.8.0"
     },
     "devDependencies": {
         "@tsconfig/node22": "^22.0.0",
