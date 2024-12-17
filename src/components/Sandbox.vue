@@ -2,6 +2,7 @@
 
 <script lang="ts">
 import * as monaco from "monaco-editor";
+import { isRuntimeOnly } from "vue";
 
 import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
@@ -15,7 +16,15 @@ const examples: {[key: string]: string} = {
 };
 
 let editor: monaco.editor.IStandaloneCodeEditor,
-    terminal: Terminal;
+    terminal: Terminal,
+    executeSource: Function = (_: string)=> {};
+
+declare global {
+    interface Window {
+        Module: any;
+        FS: any;
+    }
+}
 
 export default {
     name: "MonacoEditor",
@@ -31,6 +40,12 @@ export default {
             default: 0
         }
     },
+    data() {
+        return {
+            Module: null,
+            FS: null
+        }
+    },
     watch: {
         value(newVal) {
             if(editor && editor.getValue() !== newVal)
@@ -41,13 +56,42 @@ export default {
         exampleSelected(event: Event) {
             editor.setValue(examples[(event.target as HTMLSelectElement).value]);
         },
+        loadWasmModule() {
+            const script = document.createElement('script');
+            script.src = '/n8.js';
+
+            script.onerror = () => console.error('Failed to load n8.js');
+            script.onload = () => {
+                if(typeof window.Module === 'undefined')
+                    return;
+
+                (window.FS as any).init(
+                    () => null,
+                    (c: number) => terminal.write(String.fromCharCode(c)),
+                    (c: number) => terminal.write(String.fromCharCode(c))
+                );
+                (window.Module as any).onRuntimeInitialized = () => {
+                    executeSource = (source: string)=>
+                        window.Module.ccall(
+                            "executeSource",
+                            null,
+                            ["string"],
+                            [source]
+                        );
+                    terminal.writeln("\x1b[94mStatus\x1b[0m: Ready");
+                };
+            };
+
+            document.body.appendChild(script);
+        },
         runCode() {
-            const code = editor.getValue();
-            terminal.writeln("Running code...");
-            terminal.writeln("Execution completed.");;
+            terminal.write("\x1b[2J\x1b[H");
+            executeSource(editor.getValue());
+            terminal.writeln("\r\nExecution completed.");
         }
     },
     mounted() {
+        this.loadWasmModule();
         monaco.languages.register({id: languageId});
         monaco.editor.defineTheme("n8-theme", {
             base: "vs-dark",
@@ -109,7 +153,6 @@ export default {
 
         terminal.loadAddon(new FitAddon());
         terminal.open(this.$refs.terminalContainer as HTMLElement);
-        terminal.writeln("\x1b[94mStatus\x1b[0m: Idle");
     },
     beforeDestroy() {
         if(editor)
