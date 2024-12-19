@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { BIconDownload, BIconFileEarmarkText, BIconFileRichtext, BIconGithub, BIconHouse, BIconJoystick } from "bootstrap-icons-vue";
 import { RouterLink, useRoute } from "vue-router";
 
 const route = useRoute();
@@ -19,38 +20,38 @@ const isActive = (path: string) => route.path === path;
                     <RouterLink
                         :class="['nav-link', { active: isActive('/') }]"
                         to="/"
-                    >Home</RouterLink>
+                    ><h5 class="d-inline"><BIconHouse style="margin-bottom: 3px" /></h5> Home</RouterLink>
                 </li>
                 <li class="nav-item">
                     <RouterLink
                         :class="['nav-link', { active: isActive('/playground') }]"
                         to="/playground"
-                    >Playground</RouterLink>
+                    ><h5 class="d-inline"><BIconJoystick style="margin-bottom: 3px" /></h5> Playground</RouterLink>
                 </li>
                 <li class="nav-item">
                     <RouterLink
-                        :class="['nav-link', { active: isActive('/getting-started') }]"
-                        to="/getting-started"
-                    >Getting Started</RouterLink>
+                        :class="['nav-link', { active: isActive('/docs') }]"
+                        to="/docs"
+                    ><h5 class="d-inline"><BIconFileEarmarkText style="margin-bottom: 3px" /></h5> Documentations</RouterLink>
+                </li>
+                <li class="nav-item">
+                    <RouterLink
+                        :class="['nav-link', { active: isActive('/references') }]"
+                        to="/references"
+                    ><h5 class="d-inline"><BIconFileRichtext style="margin-bottom: 3px" /></h5>References</RouterLink>
                 </li>
                 <li class="nav-item">
                     <RouterLink
                         :class="['nav-link', { active: isActive('/download') }]"
                         to="/download"
-                    >Download</RouterLink>
+                    ><h5 class="d-inline"><BIconDownload style="margin-bottom: 3px" /></h5> Download</RouterLink>
                 </li>
                 <li class="nav-item">
-                    <RouterLink
-                        :class="['nav-link', { active: isActive('/docs') }]"
-                        to="/docs">Documentations</RouterLink>
-                </li>
-                <li class="nav-item">
-                    <RouterLink
-                        :class="['nav-link', { active: isActive('/references') }]"
-                        to="/references">References</RouterLink>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/n8lang/n8" target="_blank">GitHub</a>
+                    <a
+                        class="nav-link"
+                        href="https://github.com/n8lang/n8"
+                        target="_blank"
+                    ><h5 class="d-inline"><BIconGithub style="margin-bottom: 3px" /></h5> GitHub</a>
                 </li>
             </ul>
         </div>
