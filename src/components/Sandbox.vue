@@ -103,7 +103,7 @@ export default {
         monaco.languages.setMonarchTokensProvider(languageId, {
             tokenizer: {
                 root: [
-                    [/(while|loop|render|unless|nil|if|else|when|break|continue|random|func|ret|true|false|catch|handle|throw|maybe|then|type|use|test|val|parallel|wait)\b/, "keyword.control.n8"],
+                    [/(break|catch|continue|delete|else|false|func|halt|handle|if|lock|loop|maybe|nil|parallel|random|render|ret|size|test|then|throw|true|type|unless|use|val|wait|when|while|with)\b/, "keyword.control.n8"],
                     [/(0b[01]+|0t[0-2]+|0c[0-7]+|0x[0-9a-fA-F]+|\d+(\.\d*)?)/, "digit.numberic.n8"],
                     [/#[^\n]*/, "comment.line.n8"],
                     [/"(?:\\.|[^"\\])*"/, "string.quoted.double.n8"],
