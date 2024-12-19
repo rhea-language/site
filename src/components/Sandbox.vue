@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { BIconPlay } from "bootstrap-icons-vue";
+</script>
 
 <script lang="ts">
 import * as monaco from "monaco-editor";
@@ -168,15 +170,17 @@ export default {
 
 <template>
     <div class="row">
-        <div class="col-8 pb-2">
+        <div class="col-8 px-xs-0 pb-2">
             <select class="form-control bg-dark w-100" @change="exampleSelected($event)">
                 <option value="hello-world">Hello, world</option>
                 <option value="99-beers">99 Beers</option>
             </select>
         </div>
 
-        <div class="col-4">
-            <button class="btn btn-primary w-100" @click="runCode">Run</button>
+        <div class="col-4 px-xs-0">
+            <button class="btn btn-primary w-100 py-1" style="padding-top: 5px !important; padding-bottom: 6px !important" @click="runCode">
+                <h5 class="d-inline"><BIconPlay /></h5> Run
+            </button>
         </div>
     </div>
     <div
