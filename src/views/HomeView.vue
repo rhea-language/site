@@ -89,7 +89,7 @@ import {
                     <div class="card">
                         <div class="card-header">
                             <h3><BIconMotherboard /></h3>
-                            <h5 class="card-title m-0 p-0">Machine Learning Model Training and Prototyping</h5>
+                            <h5 class="card-title m-0 p-0">Machine Learning Model Prototyping</h5>
                         </div>
                         <div class="card-body m-0">
                             <p>N8 is ideal for Machine Learning and AI due to its efficient mathematical operations, built-in concurrency, flexible syntax, seamless integration with native libraries, and a simplified project structure, enabling rapid development and optimization of advanced algorithms and applications.</p>
