@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
+import { RouterLink, useRoute } from "vue-router";
+
+const route = useRoute();
+const isActive = (path: string) => route.path === path;
 </script>
 
 <template>
@@ -13,19 +16,38 @@ import { RouterLink } from "vue-router";
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav my-2 my-lg-0 pr-3">
                 <li class="nav-item">
-                    <RouterLink class="nav-link" to="/playground">Playground</RouterLink>
+                    <RouterLink
+                        :class="['nav-link', { active: isActive('/') }]"
+                        to="/"
+                    >Home</RouterLink>
                 </li>
                 <li class="nav-item">
-                    <RouterLink class="nav-link" to="/getting-started">Getting Started</RouterLink>
+                    <RouterLink
+                        :class="['nav-link', { active: isActive('/playground') }]"
+                        to="/playground"
+                    >Playground</RouterLink>
                 </li>
                 <li class="nav-item">
-                    <RouterLink class="nav-link" to="/download">Download</RouterLink>
+                    <RouterLink
+                        :class="['nav-link', { active: isActive('/getting-started') }]"
+                        to="/getting-started"
+                    >Getting Started</RouterLink>
                 </li>
                 <li class="nav-item">
-                    <RouterLink class="nav-link" to="/documentations">Documentations</RouterLink>
+                    <RouterLink
+                        :class="['nav-link', { active: isActive('/download') }]"
+                        to="/download"
+                    >Download</RouterLink>
                 </li>
                 <li class="nav-item">
-                    <RouterLink class="nav-link" to="/references">References</RouterLink>
+                    <RouterLink
+                        :class="['nav-link', { active: isActive('/docs') }]"
+                        to="/docs">Documentations</RouterLink>
+                </li>
+                <li class="nav-item">
+                    <RouterLink
+                        :class="['nav-link', { active: isActive('/references') }]"
+                        to="/references">References</RouterLink>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://github.com/n8lang/n8" target="_blank">GitHub</a>
