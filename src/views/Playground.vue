@@ -4,5 +4,7 @@ defineProps<{}>();
 </script>
 
 <template>
-    <Sandbox height="50" />
+    <div class="px-4">
+        <Sandbox height="50" />
+    </div>
 </template>
