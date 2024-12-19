@@ -9,7 +9,7 @@ import Footer from "@/components/Footer.vue";
 <template>
     <NavigationBar />
 
-    <div class="p-4"></div>
+    <div class="p-3"></div>
     <br/><br/>
 
     <RouterView />
