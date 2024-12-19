@@ -2,7 +2,6 @@
 
 <script lang="ts">
 import * as monaco from "monaco-editor";
-import { isRuntimeOnly } from "vue";
 
 import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
@@ -60,7 +59,10 @@ export default {
             const script = document.createElement('script');
             script.src = '/n8.js';
 
-            script.onerror = () => console.error('Failed to load n8.js');
+            script.onerror = () => {
+                terminal.clear();
+                terminal.writeln('Failed to N8 WebAssembly interpreter');
+            };
             script.onload = () => {
                 if(typeof window.Module === 'undefined')
                     return;
@@ -78,14 +80,13 @@ export default {
                             ["string"],
                             [source]
                         );
-                    terminal.writeln("\x1b[94mStatus\x1b[0m: Ready");
                 };
             };
 
             document.body.appendChild(script);
         },
         runCode() {
-            terminal.write("\x1b[2J\x1b[H");
+            terminal.clear();
             executeSource(editor.getValue());
             terminal.writeln("\r\nExecution completed.");
         }
@@ -143,7 +144,7 @@ export default {
 
         terminal = new Terminal({
             rows: 7,
-            cols: Math.floor((this.$refs.terminalContainer as HTMLElement).offsetWidth / 9),
+            cols: Math.floor((this.$refs.terminalContainer as HTMLElement).offsetWidth / 9) - 2,
             cursorBlink: true,
             theme: {
                 background: '#191d21',
@@ -153,6 +154,7 @@ export default {
 
         terminal.loadAddon(new FitAddon());
         terminal.open(this.$refs.terminalContainer as HTMLElement);
+        terminal.writeln("\x1b[94mStatus\x1b[0m: Ready");
     },
     beforeDestroy() {
         if(editor)
@@ -191,7 +193,7 @@ export default {
 <style scoped>
 
 .editor-container {
-    margin: 0 auto;
+    margin: 0;
 }
 
 .terminal-container {
