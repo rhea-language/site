@@ -16,7 +16,7 @@ import {
         <div class="row">
             <div class="col-lg-6">
                 <h2 class="border-bottom pb-1">
-                    <img src="@/assets/n8-logo.png" width="34px" class="pb-2" />
+                    <img src="@/assets/rhea-logo.png" width="34px" class="pb-2" />
                     Redefining traditional scripting!
                 </h2>
                 <br/>
@@ -57,7 +57,7 @@ import {
         <div class="container">
             <div align="center">
                 <h2>Use Cases</h2>
-                <p>N8 is a versatile, general-purpose dynamic programming language designed to support a wide range of software development applications.</p>
+                <p>Rhea is a versatile, general-purpose dynamic programming language designed to support a wide range of software development applications.</p>
             </div>
 
             <div class="row equal-cols">
@@ -68,7 +68,7 @@ import {
                             <h5 class="card-title m-0 p-0">High-performance Scientific Computing</h5>
                         </div>
                         <div class="card-body m-0">
-                            <p>N8's ability to perform direct mathematical operations on vectors and arrays makes it ideal for scientific computing applications such as simulations, data analysis, and mathematical modeling. Its concurrency support ensures that heavy computational tasks can run efficiently on multi-core CPUs.</p>
+                            <p>Rhea's ability to perform direct mathematical operations on vectors and arrays makes it ideal for scientific computing applications such as simulations, data analysis, and mathematical modeling. Its concurrency support ensures that heavy computational tasks can run efficiently on multi-core CPUs.</p>
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@ import {
                             <h5 class="card-title m-0 p-0">Data Pipelines and Extract-Transform-Load</h5>
                         </div>
                         <div class="card-body m-0">
-                            <p>N8 can be used to build efficient data pipelines for ETL processes in big data applications. Its support for complex data structures and built-in concurrency enables scalable, high-throughput data processing, making it ideal for tasks like data aggregation, transformation, and loading.</p>
+                            <p>Rhea can be used to build efficient data pipelines for ETL processes in big data applications. Its support for complex data structures and built-in concurrency enables scalable, high-throughput data processing, making it ideal for tasks like data aggregation, transformation, and loading.</p>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@ import {
                             <h5 class="card-title m-0 p-0">Machine Learning Model Prototyping</h5>
                         </div>
                         <div class="card-body m-0">
-                            <p>N8 is ideal for Machine Learning and AI due to its efficient mathematical operations, built-in concurrency, flexible syntax, seamless integration with native libraries, and a simplified project structure, enabling rapid development and optimization of advanced algorithms and applications.</p>
+                            <p>Rhea is ideal for Machine Learning and AI due to its efficient mathematical operations, built-in concurrency, flexible syntax, seamless integration with native libraries, and a simplified project structure, enabling rapid development and optimization of advanced algorithms and applications.</p>
                         </div>
                     </div>
                 </div>

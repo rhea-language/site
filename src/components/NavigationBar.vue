@@ -8,7 +8,7 @@ const isActive = (path: string) => route.path === path;
 
 <template>
     <nav class="navbar navbar-dark navbar-expand-lg shadow fixed-top m-0 py-2 w-100 bg-dark border-bottom border-gray">
-        <RouterLink class="navbar-brand pl-3" to="/">N8 <span class="desktop-only">Programming</span> Language</RouterLink>
+        <RouterLink class="navbar-brand pl-3" to="/">Rhea <span class="desktop-only">Programming</span> Language</RouterLink>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-main" aria-controls="navbar-main" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -49,7 +49,7 @@ const isActive = (path: string) => route.path === path;
                 <li class="nav-item">
                     <a
                         class="nav-link"
-                        href="https://github.com/n8lang/n8"
+                        href="https://github.com/rhea-lang/rhea"
                         target="_blank"
                     ><h5 class="d-inline"><BIconGithub style="margin-bottom: 3px" /></h5> GitHub</a>
                 </li>

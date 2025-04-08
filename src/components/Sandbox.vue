@@ -10,10 +10,10 @@ import { FitAddon } from "xterm-addon-fit";
 
 import 'xterm/css/xterm.css';
 
-const languageId: string = "n8";
+const languageId: string = "rhea";
 const examples: {[key: string]: string} = {
-    "hello-world": "#!/opt/n8lang/bin/n8\r\n\r\nval greet = func(name)\r\n\trender! \"Hello, \" + name + \"!\";\r\n\r\ngreet(\"world\");\r\n",
-    "99-beers": "#!/opt/n8lang/bin/n8\r\n\r\nval count = 99;\r\n\r\nwhile(count > 0) {\r\n\tval bottle = if(count == 1) \"bottle\" else \"bottles\";\r\n\r\n\trender! count + \" \" + bottle + \" of beer on the wall\";\r\n\trender! count + \" \" + bottle + \" of beer,\";\r\n\trender! \"Take one down, pass it around,\";\r\n\r\n\tcount = count - 1;\r\n\r\n\tif(count > 0)\r\n\t\trender! count + \" \" + bottle + \" of the beer on the wall.\\r\\n\"\r\n\telse render! \"\\r\\nNo more \" + bottle + \" of beer on the wall.\";\r\n};\r\n"
+    "hello-world": "#!/usr/bin/local/rhea\r\n\r\nval greet = func(name)\r\n\trender! \"Hello, \" + name + \"!\";\r\n\r\ngreet(\"world\");\r\n",
+    "99-beers": "#!/usr/bin/local/rhea\r\n\r\nval count = 99;\r\n\r\nwhile(count > 0) {\r\n\tval bottle = if(count == 1) \"bottle\" else \"bottles\";\r\n\r\n\trender! count + \" \" + bottle + \" of beer on the wall\";\r\n\trender! count + \" \" + bottle + \" of beer,\";\r\n\trender! \"Take one down, pass it around,\";\r\n\r\n\tcount = count - 1;\r\n\r\n\tif(count > 0)\r\n\t\trender! count + \" \" + bottle + \" of the beer on the wall.\\r\\n\"\r\n\telse render! \"\\r\\nNo more \" + bottle + \" of beer on the wall.\";\r\n};\r\n"
 };
 
 let editor: monaco.editor.IStandaloneCodeEditor,
@@ -59,11 +59,11 @@ export default {
         },
         loadWasmModule() {
             const script = document.createElement('script');
-            script.src = '/n8.js';
+            script.src = '/rhea.js';
 
             script.onerror = () => {
                 terminal.clear();
-                terminal.writeln('Failed to N8 WebAssembly interpreter');
+                terminal.writeln('Failed to Rhea WebAssembly interpreter');
             };
             script.onload = () => {
                 if(typeof window.Module === 'undefined')
@@ -96,7 +96,7 @@ export default {
     mounted() {
         this.loadWasmModule();
         monaco.languages.register({id: languageId});
-        monaco.editor.defineTheme("n8-theme", {
+        monaco.editor.defineTheme("rhea-theme", {
             base: "vs-dark",
             inherit: true,
             rules: [],
@@ -106,10 +106,10 @@ export default {
         monaco.languages.setMonarchTokensProvider(languageId, {
             tokenizer: {
                 root: [
-                    [/(break|catch|continue|delete|else|enum|false|from|func|halt|handle|import|if|lock|loop|maybe|mod|nil|parallel|random|render|ret|size|test|then|throw|true|type|unless|use|val|wait|when|while)\b/, "keyword.control.n8"],
-                    [/(0b[01]+|0t[0-2]+|0c[0-7]+|0x[0-9a-fA-F]+|\d+(\.\d*)?)/, "digit.numberic.n8"],
-                    [/#[^\n]*/, "comment.line.n8"],
-                    [/"(?:\\.|[^"\\])*"/, "string.quoted.double.n8"],
+                    [/(break|catch|continue|delete|else|enum|false|from|func|halt|handle|import|if|lock|loop|maybe|mod|nil|parallel|random|render|ret|size|test|then|throw|true|type|unless|use|val|wait|when|while)\b/, "keyword.control.rhea"],
+                    [/(0b[01]+|0t[0-2]+|0c[0-7]+|0x[0-9a-fA-F]+|\d+(\.\d*)?)/, "digit.numberic.rhea"],
+                    [/#[^\n]*/, "comment.line.rhea"],
+                    [/"(?:\\.|[^"\\])*"/, "string.quoted.double.rhea"],
                 ],
             },
         });
@@ -132,7 +132,7 @@ export default {
         editor = monaco.editor.create((this.$refs.editorContainer as HTMLElement), {
             value: this.value,
             language: languageId,
-            theme: "n8-theme",
+            theme: "rhea-theme",
             minimap: {enabled: false},
             automaticLayout: true
         });
