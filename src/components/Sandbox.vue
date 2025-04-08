@@ -12,8 +12,8 @@ import 'xterm/css/xterm.css';
 
 const languageId: string = "rhea";
 const examples: {[key: string]: string} = {
-    "hello-world": "#!/usr/bin/local/rhea\r\n\r\nval greet = func(name)\r\n\trender! \"Hello, \" + name + \"!\";\r\n\r\ngreet(\"world\");\r\n",
-    "99-beers": "#!/usr/bin/local/rhea\r\n\r\nval count = 99;\r\n\r\nwhile(count > 0) {\r\n\tval bottle = if(count == 1) \"bottle\" else \"bottles\";\r\n\r\n\trender! count + \" \" + bottle + \" of beer on the wall\";\r\n\trender! count + \" \" + bottle + \" of beer,\";\r\n\trender! \"Take one down, pass it around,\";\r\n\r\n\tcount = count - 1;\r\n\r\n\tif(count > 0)\r\n\t\trender! count + \" \" + bottle + \" of the beer on the wall.\\r\\n\"\r\n\telse render! \"\\r\\nNo more \" + bottle + \" of beer on the wall.\";\r\n};\r\n"
+    "hello-world": "#!/usr/bin/rhea\r\n\r\nval greet = func(name)\r\n\trender! \"Hello, \" + name + \"!\";\r\n\r\ngreet(\"world\");\r\n",
+    "99-beers": "#!/usr/bin/rhea\r\n\r\nval count = 99;\r\n\r\nwhile(count > 0) {\r\n\tval bottle = if(count == 1) \"bottle\" else \"bottles\";\r\n\r\n\trender! count + \" \" + bottle + \" of beer on the wall\";\r\n\trender! count + \" \" + bottle + \" of beer,\";\r\n\trender! \"Take one down, pass it around,\";\r\n\r\n\tcount = count - 1;\r\n\r\n\tif(count > 0)\r\n\t\trender! count + \" \" + bottle + \" of the beer on the wall.\\r\\n\"\r\n\telse render! \"\\r\\nNo more \" + bottle + \" of beer on the wall.\";\r\n};\r\n"
 };
 
 let editor: monaco.editor.IStandaloneCodeEditor,
