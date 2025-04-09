@@ -61,7 +61,7 @@ import {
             </div>
 
             <div class="row equal-cols">
-                <div class="col-lg-3 px-lg-1">
+                <div class="col-lg-6 px-lg-1">
                     <div class="card">
                         <div class="card-header">
                             <h3><BIconCpu/></h3>
@@ -69,11 +69,12 @@ import {
                         </div>
                         <div class="card-body m-0">
                             <p>Rhea's ability to perform direct mathematical operations on vectors and arrays makes it ideal for scientific computing applications such as simulations, data analysis, and mathematical modeling. Its concurrency support ensures that heavy computational tasks can run efficiently on multi-core CPUs.</p>
+                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-3 px-lg-1">
+                <div class="col-lg-6 px-lg-1">
                     <div class="card">
                         <div class="card-header">
                             <h3><BIconPcDisplay /></h3>
@@ -81,11 +82,14 @@ import {
                         </div>
                         <div class="card-body m-0">
                             <p>Rhea can be used to build efficient data pipelines for ETL processes in big data applications. Its support for complex data structures and built-in concurrency enables scalable, high-throughput data processing, making it ideal for tasks like data aggregation, transformation, and loading.</p>
+                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-3 px-lg-1">
+            <div class="row equal-cols">
+                <div class="col-lg-6 px-lg-1">
                     <div class="card">
                         <div class="card-header">
                             <h3><BIconMotherboard /></h3>
@@ -93,11 +97,12 @@ import {
                         </div>
                         <div class="card-body m-0">
                             <p>Rhea is ideal for Machine Learning and AI due to its efficient mathematical operations, built-in concurrency, flexible syntax, seamless integration with native libraries, and a simplified project structure, enabling rapid development and optimization of advanced algorithms and applications.</p>
+                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-3 px-lg-1">
+                <div class="col-lg-6 px-lg-1">
                     <div class="card">
                         <div class="card-header">
                             <h3><BIconController /></h3>
@@ -105,6 +110,7 @@ import {
                         </div>
                         <div class="card-body m-0">
                             <p>Language's native support for OpenGL, concurrency, vector operations is perfect for game engines that require real-time physics simulations, AI processing, and rendering pipelines. Developers can also easily wrap and interface native libraries for advanced graphical rendering or sound processing.</p>
+                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
                         </div>
                     </div>
                 </div>
