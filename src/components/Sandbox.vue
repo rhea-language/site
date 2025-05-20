@@ -54,6 +54,9 @@ export default {
         }
     },
     methods: {
+        isDarkMode() {
+            return document.body.getAttribute("data-bs-theme") == "dark";
+        },
         exampleSelected(event: Event) {
             editor.setValue(examples[(event.target as HTMLSelectElement).value]);
         },
@@ -94,13 +97,17 @@ export default {
         }
     },
     mounted() {
+        let baseTheme = "vs";
+        if(this.isDarkMode())
+            baseTheme = "vs-dark";
+
         this.loadWasmModule();
         monaco.languages.register({id: languageId});
         monaco.editor.defineTheme("rhea-theme", {
-            base: "vs-dark",
+            base: baseTheme as monaco.editor.BuiltinTheme,
             inherit: true,
             rules: [],
-            colors: {"editor.background": "#191d21"}
+            colors: {"editor.background": this.isDarkMode() ? "#000000" : "#ffffff"}
         });
 
         monaco.languages.setMonarchTokensProvider(languageId, {
@@ -149,8 +156,8 @@ export default {
             cols: Math.floor((this.$refs.terminalContainer as HTMLElement).offsetWidth / 9) - 2,
             cursorBlink: true,
             theme: {
-                background: '#191d21',
-                foreground: '#ffffff'
+                background: this.isDarkMode() ? "#000000" : "#ffffff",
+                foreground: this.isDarkMode() ? "#ffffff" : "#000000"
             }
         });
 
@@ -171,31 +178,33 @@ export default {
 <template>
     <div class="row">
         <div class="col-8 px-xs-0 pb-2">
-            <select class="form-control bg-dark w-100" @change="exampleSelected($event)">
+            <select class="form-control form-select-sm w-100" @change="exampleSelected($event)">
                 <option value="hello-world">Hello, world</option>
                 <option value="99-beers">99 Beers</option>
             </select>
         </div>
 
         <div class="col-4 px-xs-0">
-            <button class="btn btn-primary w-100 py-1" style="padding-top: 5px !important; padding-bottom: 6px !important" @click="runCode">
+            <button class="btn btn-primary w-100 py-1" @click="runCode">
                 <h5 class="d-inline"><BIconPlay /></h5> Run
             </button>
         </div>
     </div>
+
+    <div class="blob"></div>
+
     <div
-        class="editor-container border border-dark m-0 p-0"
+        class="editor-container border m-0 p-0"
         ref="editorContainer"
         :style="{ height: `${height}vh` }"
     ></div>
     <div 
-        class="terminal-container border border-dark mt-3"
+        class="terminal-container border mt-3"
         ref="terminalContainer"
     ></div>
 </template>
 
 <style scoped>
-
 .editor-container {
     margin: 0;
 }
