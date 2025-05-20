@@ -12,6 +12,10 @@ import {
 
 <template>
     <br/>
+    <div class="desktop-only">
+        <br/><br/>
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
@@ -33,89 +37,85 @@ import {
                 <div class="border-bottom pb-3"></div>
                 <br/>
 
-                <div class="row gx-0 gy-0 mt-1 px-2">
-                    <div class="col-6 px-1">
-                        <RouterLink class="btn btn-primary w-100" to="/documentations"><BIconNewspaper /><span class="pl-2">Learn More</span></RouterLink>
-                    </div>
-
-                    <div class="col-6 px-1">
-                        <RouterLink class="btn btn-secondary w-100" to="/download"><BIconDownload /><span class="pl-2">Download</span></RouterLink>
-                    </div>
+                <div class="btn-group header-btn-group w-100 mt-1 mb-4 px-2" role="group">
+                    <RouterLink class="btn btn-outline-primary w-100 bg-inherit" to="/documentations"><BIconNewspaper class="me-2" /><span class="pl-2">Learn More</span></RouterLink>
+                    <RouterLink class="btn btn-outline-primary w-100 bg-inherit" to="/download"><BIconDownload class="me-2" /><span class="pl-2">Download</span></RouterLink>
                 </div>
                 <br/>
             </div>
 
             <div class="col-lg-6">
-                <Sandbox height="32" />
+                <Sandbox height="22" />
                 <br/>
             </div>
         </div>
     </div>
-    <br/>
+    <br/><br/><br/>
 
-    <div class="bg-dark py-4 shadow">
+    <div class="mt-4 py-4 shadow-lg">
         <div class="container">
             <div align="center">
                 <h2>Use Cases</h2>
                 <p>Rhea is a versatile, general-purpose dynamic programming language designed to support a wide range of software development applications.</p>
             </div>
 
-            <div class="row equal-cols">
-                <div class="col-lg-6 px-lg-1">
-                    <div class="card">
+            <div class="row equal-cols gx-5">
+                <div class="col-lg-6">
+                    <div class="card bg-transparent card-translucent border border-primary p-4 mt-lg-4 mt-2">
                         <div class="card-header">
                             <h3><BIconCpu/></h3>
                             <h5 class="card-title m-0 p-0">High-performance Scientific Computing</h5>
                         </div>
                         <div class="card-body m-0">
-                            <p>Rhea's ability to perform direct mathematical operations on vectors and arrays makes it ideal for scientific computing applications such as simulations, data analysis, and mathematical modeling. Its concurrency support ensures that heavy computational tasks can run efficiently on multi-core CPUs.</p>
-                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
+                            <p>Rhea's ability to perform direct mathematical operations on vectors makes it ideal for scientific computing applications such as simulations, data analysis, and mathematical modeling. Its concurrency support ensures that heavy computational tasks can run efficiently on multi-core CPUs.</p>
+                            <a href="#" class="btn btn-primary w-100">Learn More</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-6 px-lg-1">
-                    <div class="card">
+                <div class="col-lg-6">
+                    <div class="card bg-transparent card-translucent border border-primary p-4 mt-lg-4 mt-2">
                         <div class="card-header">
                             <h3><BIconPcDisplay /></h3>
                             <h5 class="card-title m-0 p-0">Data Pipelines and Extract-Transform-Load</h5>
                         </div>
                         <div class="card-body m-0">
                             <p>Rhea can be used to build efficient data pipelines for ETL processes in big data applications. Its support for complex data structures and built-in concurrency enables scalable, high-throughput data processing, making it ideal for tasks like data aggregation, transformation, and loading.</p>
-                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
+                            <a href="#" class="btn btn-primary w-100">Learn More</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row equal-cols">
-                <div class="col-lg-6 px-lg-1">
-                    <div class="card">
+            <div class="row equal-cols gx-5">
+                <div class="col-lg-6">
+                    <div class="card bg-transparent card-translucent border border-primary p-4 mt-lg-4 mt-2">
                         <div class="card-header">
                             <h3><BIconMotherboard /></h3>
                             <h5 class="card-title m-0 p-0">Machine Learning Model Prototyping</h5>
                         </div>
                         <div class="card-body m-0">
                             <p>Rhea is ideal for Machine Learning and AI due to its efficient mathematical operations, built-in concurrency, flexible syntax, seamless integration with native libraries, and a simplified project structure, enabling rapid development and optimization of advanced algorithms and applications.</p>
-                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
+                            <a href="#" class="btn btn-primary w-100">Learn More</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-6 px-lg-1">
-                    <div class="card">
+                <div class="col-lg-6">
+                    <div class="card bg-transparent card-translucent border border-primary p-4 mt-lg-4 mt-2">
                         <div class="card-header">
                             <h3><BIconController /></h3>
                             <h5 class="card-title m-0 p-0">Foundational Graphics and Game Development</h5>
                         </div>
                         <div class="card-body m-0">
-                            <p>Language's native support for OpenGL, concurrency, vector operations is perfect for game engines that require real-time physics simulations, AI processing, and rendering pipelines. Developers can also easily wrap and interface native libraries for advanced graphical rendering or sound processing.</p>
-                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
+                            <p>Language's native support for OpenGL, concurrency, vector operations is perfect for game engines that require real-time physics simulations and rendering pipelines. Developers can also easily wrap and interface native libraries for advanced graphical rendering or sound processing.</p>
+                            <a href="#" class="btn btn-primary w-100">Learn More</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <br/>
     </div>
     <br/>
 </template>
@@ -148,5 +148,9 @@ import {
     -webkit-flex: 1 1 auto;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto; 
+}
+
+.header-btn-group .btn:hover {
+    color: var(--bs-blue) !important;
 }
 </style>
