@@ -30,21 +30,24 @@ const isActive = (path: string) => route.path === path;
                 </li>
                 <li class="nav-item ms-2">
                     <RouterLink
-                        :class="['nav-link', { active: isActive('/docs') }]"
-                        to="/docs"
-                    ><span class="d-flex"><BIconFileEarmarkText class="me-2 mt-1" /> Documentations</span></RouterLink>
-                </li>
-                <li class="nav-item ms-2">
-                    <RouterLink
-                        :class="['nav-link', { active: isActive('/references') }]"
-                        to="/references"
-                    ><span class="d-flex"><BIconFileRichtext class="me-2 mt-1" /> References</span></RouterLink>
-                </li>
-                <li class="nav-item ms-2">
-                    <RouterLink
                         :class="['nav-link', { active: isActive('/download') }]"
                         to="/download"
                     ><span class="d-flex"><BIconDownload class="me-2 mt-1" /> Download</span></RouterLink>
+                </li>
+                <li class="nav-item ms-2 dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="d-inline-block"><BIconFileEarmarkText class="me-1" /> Documentations</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <RouterLink
+                            class="dropdown-item"
+                            to="/docs"
+                        ><BIconFileEarmarkText class="me-1" /> Language Tour</RouterLink>
+                        <RouterLink
+                            class="dropdown-item"
+                            to="/references"
+                        ><BIconFileRichtext class="me-1" /> References</RouterLink>
+                    </div>
                 </li>
                 <li class="nav-item ms-2">
                     <a
