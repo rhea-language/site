@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { BIconDownload, BIconFileEarmarkText, BIconFileRichtext, BIconGithub, BIconHouse, BIconJoystick } from "bootstrap-icons-vue";
+import {
+    BIconDownload,
+    BIconFileEarmarkText,
+    BIconFileRichtext,
+    BIconGithub,
+    BIconHouse,
+    BIconJoystick
+} from "bootstrap-icons-vue";
 import { RouterLink, useRoute } from "vue-router";
 
 const route = useRoute();
@@ -52,7 +59,7 @@ const isActive = (path: string) => route.path === path;
                 <li class="nav-item ms-2">
                     <a
                         class="nav-link"
-                        href="https://github.com/rhea-lang/rhea"
+                        href="https://github.com/rhea-language/rhea"
                         target="_blank"
                     ><span class="d-flex"><BIconGithub class="me-2 mt-1" /> GitHub</span></a>
                 </li>
