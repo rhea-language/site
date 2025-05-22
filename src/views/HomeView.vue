@@ -11,13 +11,14 @@ import {
 import { onMounted } from "vue";
 
 function fetchCommitData() {
-    let commitsRows: HTMLElement = document.getElementById(
+    let commitsRows: HTMLElement | null = document.getElementById(
         "commits-desktop"
-    ) as HTMLElement;
+    );
     const showError = ()=> {
-        commitsRows.innerHTML = "<tr><td align=\"center\" "
-            + "colspan=\"4\">Failed to fetch commmit "
-            + "data</td></tr>";
+        if(commitsRows)
+            commitsRows.innerHTML = "<tr><td align=\"center\" "
+                + "colspan=\"4\">Failed to fetch commmit "
+                + "data</td></tr>";
     };
 
     fetch(
@@ -28,6 +29,9 @@ function fetchCommitData() {
 
         return response.json();
     }).then(commits => {
+        if(!commitsRows)
+            return;
+
         commitsRows.innerHTML = "";
         if(!commits.length || commits.length == 0) {
             showError();
@@ -204,35 +208,6 @@ onMounted(()=> {
 </template>
 
 <style lang="css" scoped>
-.row.equal-cols {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-}
-  
-.row.equal-cols:before, .row.equal-cols:after {
-	display: block;
-}
-
-.row.equal-cols > [class*='col-'] {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    margin-top: 22px;
-}
-  
-.row.equal-cols > [class*='col-'] > * {
-    -webkit-flex: 1 1 auto;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto; 
-}
-
 .header-btn-group .btn:hover {
     color: var(--bs-blue) !important;
 }
