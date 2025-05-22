@@ -12,7 +12,7 @@ import { onMounted } from "vue";
 
 function fetchCommitData() {
     let commitsRows: HTMLElement = document.getElementById(
-        "commits-desktop"
+        "commits"
     ) as HTMLElement;
     const showError = ()=> {
         commitsRows.innerHTML = "<tr><td align=\"center\" "
@@ -20,10 +20,8 @@ function fetchCommitData() {
             + "data</td></tr>";
     };
 
-    const headers = {"Authorization": "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"};
     fetch(
-        "https://api.github.com/repos/rhea-language/rhea/commits?per_page=12",
-        {headers}
+        "https://api.github.com/repos/rhea-language/rhea/commits?per_page=12"
     ).then(response => {
         if(!response.ok)
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -36,28 +34,21 @@ function fetchCommitData() {
             return;
         }
 
-        commits.forEach((commit: any, _: number) => {
+        commits.forEach((commit: any, index: number) => {
             let row = document.createElement("tr"),
                 hash = document.createElement("td"),
                 message = document.createElement("td"),
                 timestamp = document.createElement("td"),
                 author = document.createElement("td");
 
-            hash.innerHTML = "<a href=\"https://github.com/rhea-language/rhea/commit/"
-                + commit.sha
-                + "\" target=\"_blank\">"
-                + commit.sha.substring(0, 12)
-                + "</a>";
+            hash.innerHTML = commit.sha.substring(0, 12);
             message.innerHTML = commit.commit.message;
             timestamp.innerHTML = commit.commit.author.date;
             author.innerHTML = "<a href=\"https://github.com/"
                 + commit.author.login
-                + "\" class=\"text-decoration-none\" target=\"_blank\">"
+                + "\" target=\"_blank\">"
                 + commit.commit.author.name
                 + "</a>";
-
-            timestamp.classList.add("desktop-only");
-            author.classList.add("desktop-only");
 
             row.append(hash);
             row.append(message);
@@ -71,7 +62,7 @@ function fetchCommitData() {
 
 onMounted(()=> {
     fetchCommitData();
-    setInterval(fetchCommitData, 180000);
+    setInterval(fetchCommitData, 60000);
 });
 </script>
 
@@ -195,11 +186,11 @@ onMounted(()=> {
                     <tr class="fw-bold">
                         <td>Hash</td>
                         <td>Message</td>
-                        <td class="desktop-only">Timestamp</td>
-                        <td class="desktop-only">Author</td>
+                        <td>Timestamp</td>
+                        <td>Author</td>
                     </tr>
                 </thead>
-                <tbody id="commits-desktop"></tbody>
+                <tbody id="commits"></tbody>
             </table>
         </div>
     </div>
