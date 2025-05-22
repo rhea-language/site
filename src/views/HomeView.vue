@@ -12,7 +12,7 @@ import { onMounted } from "vue";
 
 function fetchCommitData() {
     let commitsRows: HTMLElement = document.getElementById(
-        "commits"
+        "commits-desktop"
     ) as HTMLElement;
     const showError = ()=> {
         commitsRows.innerHTML = "<tr><td align=\"center\" "
@@ -34,21 +34,28 @@ function fetchCommitData() {
             return;
         }
 
-        commits.forEach((commit: any, index: number) => {
+        commits.forEach((commit: any, _: number) => {
             let row = document.createElement("tr"),
                 hash = document.createElement("td"),
                 message = document.createElement("td"),
                 timestamp = document.createElement("td"),
                 author = document.createElement("td");
 
-            hash.innerHTML = commit.sha.substring(0, 12);
+            hash.innerHTML = "<a href=\"https://github.com/rhea-language/rhea/commit/"
+                + commit.sha
+                + "\" target=\"_blank\">"
+                + commit.sha.substring(0, 12)
+                + "</a>";
             message.innerHTML = commit.commit.message;
             timestamp.innerHTML = commit.commit.author.date;
             author.innerHTML = "<a href=\"https://github.com/"
                 + commit.author.login
-                + "\" target=\"_blank\">"
+                + "\" class=\"text-decoration-none\" target=\"_blank\">"
                 + commit.commit.author.name
                 + "</a>";
+
+            timestamp.classList.add("desktop-only");
+            author.classList.add("desktop-only");
 
             row.append(hash);
             row.append(message);
@@ -62,7 +69,7 @@ function fetchCommitData() {
 
 onMounted(()=> {
     fetchCommitData();
-    setInterval(fetchCommitData, 60000);
+    setInterval(fetchCommitData, 180000);
 });
 </script>
 
@@ -186,11 +193,11 @@ onMounted(()=> {
                     <tr class="fw-bold">
                         <td>Hash</td>
                         <td>Message</td>
-                        <td>Timestamp</td>
-                        <td>Author</td>
+                        <td class="desktop-only">Timestamp</td>
+                        <td class="desktop-only">Author</td>
                     </tr>
                 </thead>
-                <tbody id="commits"></tbody>
+                <tbody id="commits-desktop"></tbody>
             </table>
         </div>
     </div>
