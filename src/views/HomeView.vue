@@ -8,6 +8,62 @@ import {
     BIconNewspaper,
     BIconPcDisplay
 } from "bootstrap-icons-vue";
+import { onMounted } from "vue";
+
+function fetchCommitData() {
+    let commitsRows: HTMLElement = document.getElementById(
+        "commits"
+    ) as HTMLElement;
+    const showError = ()=> {
+        commitsRows.innerHTML = "<tr><td align=\"center\" "
+            + "colspan=\"4\">Failed to fetch commmit "
+            + "data</td></tr>";
+    };
+
+    fetch(
+        "https://api.github.com/repos/rhea-language/rhea/commits?per_page=12"
+    ).then(response => {
+        if(!response.ok)
+            throw new Error(`HTTP error! status: ${response.status}`);
+
+        return response.json();
+    }).then(commits => {
+        commitsRows.innerHTML = "";
+        if(!commits.length || commits.length == 0) {
+            showError();
+            return;
+        }
+
+        commits.forEach((commit: any, index: number) => {
+            let row = document.createElement("tr"),
+                hash = document.createElement("td"),
+                message = document.createElement("td"),
+                timestamp = document.createElement("td"),
+                author = document.createElement("td");
+
+            hash.innerHTML = commit.sha.substring(0, 12);
+            message.innerHTML = commit.commit.message;
+            timestamp.innerHTML = commit.commit.author.date;
+            author.innerHTML = "<a href=\"https://github.com/"
+                + commit.author.login
+                + "\" target=\"_blank\">"
+                + commit.commit.author.name
+                + "</a>";
+
+            row.append(hash);
+            row.append(message);
+            row.append(timestamp);
+            row.append(author);
+
+            commitsRows.append(row);
+        });
+    }).catch(_ => showError());
+}
+
+onMounted(()=> {
+    fetchCommitData();
+    setInterval(fetchCommitData, 60000);
+});
 </script>
 
 <template>
@@ -38,14 +94,14 @@ import {
                 <br/>
 
                 <div class="btn-group header-btn-group w-100 mt-1 mb-4 px-2" role="group">
-                    <RouterLink class="btn btn-outline-primary w-100 bg-inherit" to="/documentations"><BIconNewspaper class="me-2" /><span class="pl-2">Learn More</span></RouterLink>
+                    <RouterLink class="btn btn-outline-primary w-100 bg-inherit" to="/docs"><BIconNewspaper class="me-2" /><span class="pl-2">Learn More</span></RouterLink>
                     <RouterLink class="btn btn-outline-primary w-100 bg-inherit" to="/download"><BIconDownload class="me-2" /><span class="pl-2">Download</span></RouterLink>
                 </div>
                 <br/>
             </div>
 
             <div class="col-lg-6">
-                <Sandbox height="22" />
+                <Sandbox height="22" blobs />
                 <br/>
             </div>
         </div>
@@ -118,6 +174,26 @@ import {
         <br/>
     </div>
     <br/>
+
+    <div class="mt-2 py-4">
+        <div class="container">
+            <h2>Latest Commits</h2>
+            <p>The table below shows the most recent updates on Rhea programming language's core repository on GitHub.</p>
+            <br/>
+
+            <table class="table table-strip table-hover table-collapse">
+                <thead>
+                    <tr class="fw-bold">
+                        <td>Hash</td>
+                        <td>Message</td>
+                        <td>Timestamp</td>
+                        <td>Author</td>
+                    </tr>
+                </thead>
+                <tbody id="commits"></tbody>
+            </table>
+        </div>
+    </div>
 </template>
 
 <style lang="css" scoped>
