@@ -1,9 +1,26 @@
 <script setup lang="ts">
-import 'bootstrap';
-import { RouterView } from "vue-router";
+import "bootstrap";
+import { watch } from "vue";
+import {
+    RouterView,
+    useRoute
+} from "vue-router";
 
 import NavigationBar from "@/components/NavigationBar.vue";
 import Footer from "@/components/Footer.vue";
+
+const route = useRoute();
+watch(
+    () => route.fullPath,
+    async(n, nn) => {
+        const toggler = document.querySelector(
+            "[data-bs-target=\"#navbar-main\"]"
+        );
+
+        toggler.click();
+        window.scrollTo(0, 0)
+    }
+);
 </script>
 
 <template>
