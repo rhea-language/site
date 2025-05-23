@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import "bootstrap";
+
+import isMobileBrowser from "@/assets/isMobileBrowser.ts";
 import { watch } from "vue";
 import {
     RouterView,
@@ -13,11 +15,13 @@ const route = useRoute();
 watch(
     () => route.fullPath,
     async(n, nn) => {
-        const toggler = document.querySelector(
-            "[data-bs-target=\"#navbar-main\"]"
-        );
+        if(isMobileBrowser()) {
+            const toggler = document.querySelector(
+                "[data-bs-target=\"#navbar-main\"]"
+            );
+            toggler.click();
+        }
 
-        toggler.click();
         window.scrollTo(0, 0)
     }
 );
