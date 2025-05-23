@@ -3,12 +3,11 @@ import { BIconPlay } from "bootstrap-icons-vue";
 </script>
 
 <script lang="ts">
+import "xterm/css/xterm.css";
 import * as monaco from "monaco-editor";
 
 import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
-
-import 'xterm/css/xterm.css';
 
 const languageId: string = "rhea";
 const examples: {[key: string]: string} = {
@@ -99,20 +98,41 @@ export default {
             terminal.clear();
             executeSource(editor.getValue());
             terminal.writeln("\r\nExecution completed.");
+        },
+        applyTheme() {
+            const theme = localStorage.getItem("color") || "dark";
+            const isDark = theme === "dark";
+
+            monaco.editor.setTheme("rhea-theme-" + theme);
+            terminal.options.theme = {
+                background: isDark ? "#000000" : "#ffffff",
+                foreground: isDark ? "#ffffff" : "#000000"
+            };
+
+            return theme;
+        },
+        handleStorageChange(event: StorageEvent) {
+            if(event.key === "color")
+                document.body.setAttribute(
+                    "data-bs-theme",
+                    this.applyTheme()
+                );
         }
     },
     mounted() {
-        let baseTheme = "vs";
-        if(this.isDarkMode())
-            baseTheme = "vs-dark";
-
         this.loadWasmModule();
         monaco.languages.register({id: languageId});
-        monaco.editor.defineTheme("rhea-theme", {
-            base: baseTheme as monaco.editor.BuiltinTheme,
+        monaco.editor.defineTheme("rhea-theme-dark", {
+            base: "vs-dark" as monaco.editor.BuiltinTheme,
             inherit: true,
             rules: [],
-            colors: {"editor.background": this.isDarkMode() ? "#000000" : "#ffffff"}
+            colors: {"editor.background": "#000000"}
+        });
+        monaco.editor.defineTheme("rhea-theme-light", {
+            base: "vs" as monaco.editor.BuiltinTheme,
+            inherit: true,
+            rules: [],
+            colors: {"editor.background": "#ffffff"}
         });
 
         monaco.languages.setMonarchTokensProvider(languageId, {
@@ -169,8 +189,31 @@ export default {
         terminal.loadAddon(new FitAddon());
         terminal.open(this.$refs.terminalContainer as HTMLElement);
         terminal.writeln("\x1b[94mStatus\x1b[0m: Ready");
+
+        this.applyTheme();
+        window.addEventListener(
+            "storage",
+            this.handleStorageChange
+        );
+
+        const observer = new MutationObserver(() => {
+            this.applyTheme();
+        });
+        observer.observe(
+            document.body,
+            {
+                attributes: true,
+                attributeFilter: ['data-bs-theme']
+            }
+        );
+        this.themeObserver = observer;
     },
     beforeDestroy() {
+        window.removeEventListener(
+            "storage",
+            this.handleStorageChange
+        );
+
         if(editor)
             editor.dispose();
 
