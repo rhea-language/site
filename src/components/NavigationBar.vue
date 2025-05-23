@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import isMobileBrowser from "@/assets/isMobileBrowser.ts";
 import {
     BIconBrightnessHigh,
     BIconDownload,
@@ -21,7 +22,15 @@ function colorScheme(color: string) {
         "data-bs-theme",
         color
     );
+
     localStorage.setItem("color", color);
+
+    if(isMobileBrowser()) {
+        const toggler = document.querySelector(
+            "[data-bs-target=\"#navbar-main\"]"
+        );
+        toggler.click();
+    }
 }
 
 function toggleLightMode() {
