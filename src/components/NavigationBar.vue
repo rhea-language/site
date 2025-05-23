@@ -1,16 +1,46 @@
 <script setup lang="ts">
 import {
+    BIconBrightnessHigh,
     BIconDownload,
     BIconFileEarmarkText,
     BIconFileRichtext,
     BIconGithub,
+    BIconLightbulb,
     BIconHouse,
-    BIconJoystick
+    BIconJoystick,
+    BIconMoonStars
 } from "bootstrap-icons-vue";
+import { onMounted } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 
 const route = useRoute();
 const isActive = (path: string) => route.path === path;
+
+function colorScheme(color: string) {
+    document.body.setAttribute(
+        "data-bs-theme",
+        color
+    );
+    localStorage.setItem("color", color);
+}
+
+function toggleLightMode() {
+    colorScheme("light");
+}
+
+function toggleDarkMode() {
+    colorScheme("dark");
+}
+
+onMounted(()=> {
+    const color = localStorage.getItem("color") || "dark";
+    if(color) {
+        if(color == "light")
+            toggleLightMode();
+        else if(color == "dark")
+            toggleDarkMode();
+    }
+});
 </script>
 
 <template>
@@ -54,6 +84,15 @@ const isActive = (path: string) => route.path === path;
                             class="dropdown-item"
                             to="/references"
                         ><BIconFileRichtext class="me-1" /> References</RouterLink>
+                    </div>
+                </li>
+                <li class="nav-item ms-2 dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="d-inline-block"><BIconLightbulb class="me-1" /> Color Scheme</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#" @click="toggleLightMode"><BIconBrightnessHigh class="me-1" /> Light Mode</a>
+                        <a class="dropdown-item" href="#" @click="toggleDarkMode"><BIconMoonStars class="me-1" /> Dark Mode</a>
                     </div>
                 </li>
                 <li class="nav-item ms-2">
