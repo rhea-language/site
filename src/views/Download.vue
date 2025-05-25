@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 export default {
     name: "Download",
     props: {
@@ -20,6 +20,7 @@ export default {
     }
 };
 </script>
+
 <template>
     <div class="container mt-4">
         <h2 class="mb-4">Downloads</h2>
