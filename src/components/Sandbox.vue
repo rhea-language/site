@@ -255,7 +255,7 @@ export default {
 
     <div v-if="!showExamples" class="card bg-transparent shadow-lg border mt-2 mb-4 mx-lg-4">
         <div class="card-header">
-            <div class="row w-100 desktop-only">
+            <div class="row w-100">
                 <div class="col-lg-8 col-7 pt-1 text-white">{{ title }}</div>
                 <div class="col-lg-4 col-5 m-0 p-0" align="right">
                     <div class="btn-group w-100 m-0 p-0" role="button">
