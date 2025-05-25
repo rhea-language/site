@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { BIconPlay } from "bootstrap-icons-vue";
+import {
+    BIconArrowClockwise,
+    BIconPlay
+} from "bootstrap-icons-vue";
 </script>
 
 <script lang="ts">
@@ -27,11 +30,16 @@ declare global {
 }
 
 export default {
-    name: "MonacoEditor",
+    name: "code-editor",
     props: {
         value: {
             type: String,
             required: true,
+            default: ""
+        },
+        title: {
+            type: String,
+            required: false,
             default: ""
         },
         height: {
@@ -39,10 +47,10 @@ export default {
             required: true,
             default: 0
         },
-        blobs: {
+        showExamples: {
             type: Boolean,
             required: false,
-            default: false
+            default: true
         }
     },
     data() {
@@ -94,10 +102,14 @@ export default {
 
             document.body.appendChild(script);
         },
+        resetCode() {
+            if(this.value)
+                editor.setValue(this.value);
+        },
         runCode() {
             terminal.clear();
             executeSource(editor.getValue());
-            terminal.writeln("\r\nExecution completed.");
+            terminal.writeln("\r\n\u001b[1;34mExecution completed.\u001b[0m");
         },
         applyTheme() {
             const theme = localStorage.getItem("color") || "dark";
@@ -174,10 +186,13 @@ export default {
             if(newValue !== this.value)
                 this.$emit("input", newValue);
         });
-        editor.setValue(examples["99-beers"]);
+
+        if(!this.value || this.value == "")
+            editor.setValue(examples["99-beers"]);
+        else editor.setValue(this.value);
 
         terminal = new Terminal({
-            rows: 7,
+            rows: (!this.value || this.value == "") ? 7 : 5,
             cols: Math.floor((this.$refs.terminalContainer as HTMLElement).offsetWidth / 9) - 2,
             cursorBlink: true,
             theme: {
@@ -206,7 +221,6 @@ export default {
                 attributeFilter: ['data-bs-theme']
             }
         );
-        this.themeObserver = observer;
     },
     beforeDestroy() {
         window.removeEventListener(
@@ -224,35 +238,70 @@ export default {
 </script>
 
 <template>
-    <div class="row">
-        <div class="col-8 px-xs-0 pb-2">
+    <div v-if="showExamples" class="row mb-2">
+        <div class="col-8">
             <select class="form-control form-select-sm w-100" @change="exampleSelected($event)">
                 <option value="99-beers">99 Beers</option>
                 <option value="hello-world">Hello, world</option>
             </select>
         </div>
 
-        <div class="col-4 px-xs-0">
+        <div class="col-4">
             <button class="btn btn-primary w-100 py-1" @click="runCode">
                 <h5 class="d-inline"><BIconPlay /></h5> <span class="desktop-only">Run</span>
             </button>
         </div>
     </div>
 
-    <div v-if="blobs" class="blob"></div>
+    <div v-if="!showExamples" class="card bg-transparent shadow-lg border mt-2 mb-4 mx-lg-4">
+        <div class="card-header">
+            <div class="row w-100 desktop-only">
+                <div class="col-lg-8 col-7 pt-1 text-white">{{ title }}</div>
+                <div class="col-lg-4 col-5 m-0 p-0" align="right">
+                    <div class="btn-group w-100 m-0 p-0" role="button">
+                        <button class="btn btn-outline-primary bg-white text-primary w-100 py-1" @click="runCode">
+                            <h5 class="d-inline"><BIconPlay /></h5> <span class="desktop-only">Run</span>
+                        </button>
+                        <button class="btn btn-outline-primary bg-white text-primary w-100 py-1" @click="resetCode">
+                            <h5 class="d-inline"><BIconArrowClockwise /></h5> <span class="desktop-only">Reset</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body bg-transparent p-0">
+            <div
+                class="editor-container m-0 p-0"
+                ref="editorContainer"
+                :style="{ height: `${height}vh` }"
+            ></div>
 
-    <div
-        class="editor-container border m-0 p-0"
-        ref="editorContainer"
-        :style="{ height: `${height}vh` }"
-    ></div>
-    <div 
-        class="terminal-container border mt-3"
-        ref="terminalContainer"
-    ></div>
+            <div 
+                class="terminal-container border-top p-2"
+                ref="terminalContainer"
+            ></div>
+        </div>
+    </div>
+    <div v-else>
+        <div
+            class="editor-container border m-0 p-0"
+            ref="editorContainer"
+            :style="{ height: `${height}vh` }"
+        ></div>
+
+        <div v-if="showExamples" class="mt-3"></div>
+        <div 
+            class="terminal-container border"
+            ref="terminalContainer"
+        ></div>
+    </div>
 </template>
 
 <style scoped>
+.card-header {
+    background-color: var(--bs-primary);
+}
+
 .editor-container {
     margin: 0;
 }
