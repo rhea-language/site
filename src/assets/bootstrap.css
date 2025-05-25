@@ -9479,13 +9479,13 @@ fieldset:disabled .btn {
 }
 
 .bg-glass {
-  background-color: rgba(255, 255, 255, 0.5) !important;
-  backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: saturate(100%) blur(20px);
 }
 
-.bg-glass-dark {
-  background-color: rgba(28, 28, 30, 0.6) !important;
-  backdrop-filter: blur(20px);
+[data-bs-theme='dark'] .bg-glass {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: saturate(100%) blur(20px);
 }
 
 .bg-body-secondary {
