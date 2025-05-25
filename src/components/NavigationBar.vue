@@ -16,6 +16,7 @@ import { RouterLink, useRoute } from "vue-router";
 
 const route = useRoute();
 const isActive = (path: string) => route.path === path;
+let isFirst = true;
 
 function colorScheme(color: string) {
     document.body.setAttribute(
@@ -24,12 +25,13 @@ function colorScheme(color: string) {
     );
 
     localStorage.setItem("color", color);
-
-    if(isMobileBrowser()) {
+    if(isMobileBrowser() && !isFirst) {
         const toggler = document.querySelector(
             "[data-bs-target=\"#navbar-main\"]"
         );
+
         toggler.click();
+        isFirst = false;
     }
 }
 
