@@ -14,12 +14,15 @@ import Footer from "@/components/Footer.vue";
 const route = useRoute();
 watch(
     () => route.fullPath,
-    async(n, nn) => {
+    async(_, __) => {
         if(isMobileBrowser()) {
             const toggler = document.querySelector(
                 "[data-bs-target=\"#navbar-main\"]"
-            );
-            toggler.click();
+            ) as HTMLElement;
+
+            const mainNav = document.getElementById("navbar-main");
+            if(mainNav?.classList.contains("show"))
+                toggler.click();
         }
 
         window.scrollTo(0, 0)
