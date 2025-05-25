@@ -1,5 +1,8 @@
+html, body {
+    overflow-x: hidden !important;
+}
+
 body {
-    overflow-x: hidden;
     width: 100%;
     transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) !important;
 }
@@ -79,41 +82,6 @@ a.btn:hover {
 [data-bs-theme='dark'] {
     .bg-inherit {
         background-color: #000000 !important;
-    }
-}
-
-.blob {
-    position: absolute;
-    opacity: 0.5;
-    width: 250px;
-    aspect-ratio: 1/1;
-    animation: animate 10s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite alternate forwards;
-    filter: saturate(100%) blur(40px);
-    z-index: -1;
-    background: linear-gradient(
-        47deg,
-        var(--bs-primary) 21%,
-        var(--bs-info) 67%,
-        var(--bs-teal) 81%
-    );
-}
-
-@keyframes animate {
-    0% {
-        translate: 40% -25%;
-        border-radius: 60% 40% 30% 70% / 100% 85% 92% 74%;
-    }
-    50% {
-        translate: 100% 20%;
-        border-radius: 20% 71% 47% 70% / 81% 15% 22% 54%;
-        rotate: 41deg;
-        scale: 1.15;
-    }
-    100% {
-        translate: 15% 39%;
-        border-radius: 100% 75% 92% 74% / 60% 80% 30% 70%;
-        rotate: -60deg;
-        scale: 1.05;
     }
 }
 
