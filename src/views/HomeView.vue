@@ -78,10 +78,7 @@ onMounted(()=> {
 </script>
 
 <template>
-    <br/>
-    <div class="desktop-only">
-        <br/><br/>
-    </div>
+    <br/><br class="desktop-only" />
 
     <div class="container">
         <div class="row">
@@ -112,7 +109,7 @@ onMounted(()=> {
             </div>
 
             <div class="col-lg-6">
-                <Sandbox height="22" blobs />
+                <Sandbox height="22" />
                 <br/>
             </div>
         </div>
@@ -128,7 +125,7 @@ onMounted(()=> {
 
             <div class="row equal-cols gx-5">
                 <div class="col-lg-6">
-                    <div class="card bg-transparent card-translucent border border-primary p-4 mt-lg-4 mt-2">
+                    <div class="card bg-glass card-translucent border border-primary p-4 mt-lg-4 mt-2">
                         <div class="card-header">
                             <h3><BIconCpu/></h3>
                             <h5 class="card-title m-0 p-0">High-performance Scientific Computing</h5>
@@ -141,7 +138,7 @@ onMounted(()=> {
                 </div>
 
                 <div class="col-lg-6">
-                    <div class="card bg-transparent card-translucent border border-primary p-4 mt-lg-4 mt-2">
+                    <div class="card bg-glass card-translucent border border-primary p-4 mt-lg-4 mt-2">
                         <div class="card-header">
                             <h3><BIconPcDisplay /></h3>
                             <h5 class="card-title m-0 p-0">Data Pipelines and Extract-Transform-Load</h5>
@@ -156,7 +153,7 @@ onMounted(()=> {
 
             <div class="row equal-cols gx-5">
                 <div class="col-lg-6">
-                    <div class="card bg-transparent card-translucent border border-primary p-4 mt-lg-4 mt-2">
+                    <div class="card bg-glass card-translucent border border-primary p-4 mt-lg-4 mt-2">
                         <div class="card-header">
                             <h3><BIconMotherboard /></h3>
                             <h5 class="card-title m-0 p-0">Machine Learning Model Prototyping</h5>
@@ -169,7 +166,7 @@ onMounted(()=> {
                 </div>
 
                 <div class="col-lg-6">
-                    <div class="card bg-transparent card-translucent border border-primary p-4 mt-lg-4 mt-2">
+                    <div class="card bg-glass card-translucent border border-primary p-4 mt-lg-4 mt-2">
                         <div class="card-header">
                             <h3><BIconController /></h3>
                             <h5 class="card-title m-0 p-0">Foundational Graphics and Game Development</h5>
@@ -192,7 +189,7 @@ onMounted(()=> {
             <p>The table below shows the most recent updates on Rhea programming language's core repository on GitHub.</p>
             <br/>
 
-            <table class="table table-strip table-hover table-collapse">
+            <table class="table table-strip table-hover table-collapse border border-gray">
                 <thead>
                     <tr class="fw-bold">
                         <td>Hash</td>
