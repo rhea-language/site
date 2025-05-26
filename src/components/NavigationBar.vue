@@ -28,9 +28,10 @@ function colorScheme(color: string) {
     if(isMobileBrowser() && !isFirst) {
         const toggler = document.querySelector(
             "[data-bs-target=\"#navbar-main\"]"
-        );
+        ) as HTMLElement;
 
-        toggler.click();
+        if(toggler)
+            toggler.click();
         isFirst = false;
     }
 }
