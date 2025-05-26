@@ -114,11 +114,12 @@ onMounted(()=> {
             </div>
         </div>
     </div>
-    <br/><br/><br/>
+    <br/>
 
     <div class="mt-4 py-4 shadow-lg">
         <div class="container">
             <div align="center">
+                <br class="desktop-only" />
                 <h2>Use Cases</h2>
                 <p>Rhea is a versatile, general-purpose dynamic programming language designed to support a wide range of software development applications.</p>
             </div>
@@ -185,7 +186,7 @@ onMounted(()=> {
 
     <div class="mt-2 py-4">
         <div class="container">
-            <h2>Latest Commits</h2>
+            <h2>Latest Changes</h2>
             <p>The table below shows the most recent updates on Rhea programming language's core repository on GitHub.</p>
             <br/>
 
