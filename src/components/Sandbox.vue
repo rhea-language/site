@@ -15,6 +15,8 @@ import { FitAddon } from "xterm-addon-fit";
 const languageId: string = "rhea";
 const examples: {[key: string]: string} = {
     "hello-world": "#!/usr/bin/rhea\r\n\r\nval greet = func(name)\r\n\trender! \"Hello, \" + name + \"!\"\r\ngreet(\"world\")\r\n",
+    "fibonacci": "#!/usr/bin/rhea\r\n\r\nfib = func(n) {\r\n\tret if(n <= 1) n\r\n\t\telse fib(n - 1) + fib(n - 2)\r\n}\r\n\r\nvalues = []\r\nloop(i = 0; i < 10; i = i + 1)\r\n\tvalues = values + fib(i)\r\n\r\nret values\r\n",
+    "colors": "#!/usr/bin/rhea\r\n\r\nenum Color {\r\n\tRed   = 1,\r\n\tGreen = 2,\r\n\tBlue  = 3\r\n}\r\n\r\nprint_color = func(color)\r\n\twhen(color) {\r\n\t\tif(Color.Red)   \"red\",\r\n\t\tif(Color.Green) \"green\",\r\n\t\telse            \"blue\"\r\n\t}\r\n\r\nrender \"The color is \" + print_color(Color.Green)\r\n",
     "99-beers": "#!/usr/bin/rhea\r\n\r\nval count = 99\r\nwhile(count > 0) {\r\n\tval bottle = if(count == 1) \"bottle\" else \"bottles\"\r\n\r\n\trender! count + \" \" + bottle + \" of beer on the wall\"\r\n\trender! count + \" \" + bottle + \" of beer,\"\r\n\trender! \"Take one down, pass it around,\"\r\n\r\n\tcount = count - 1\r\n\tif(count > 0)\r\n\t\trender! count + \" \" + bottle + \" of the beer on the wall.\\r\\n\"\r\n\telse render! \"\\r\\nNo more \" + bottle + \" of beer on the wall.\"\r\n}\r\n"
 };
 
@@ -242,7 +244,9 @@ export default {
         <div class="col-8">
             <select class="form-control form-select-sm w-100" @change="exampleSelected($event)">
                 <option value="99-beers">99 Beers</option>
+                <option value="fibonacci">Fibonacci</option>
                 <option value="hello-world">Hello, world</option>
+                <option value="colors">Colors</option>
             </select>
         </div>
 
@@ -253,7 +257,7 @@ export default {
         </div>
     </div>
 
-    <div v-if="!showExamples" class="card bg-transparent shadow-lg border mt-2 mb-4 mx-lg-4">
+    <div v-if="!showExamples" class="card bg-transparent shadow-lg border border-primary mt-2 mb-4 mx-lg-4">
         <div class="card-header">
             <div class="row w-100">
                 <div class="col-lg-8 col-7 pt-1 text-white">{{ title }}</div>
