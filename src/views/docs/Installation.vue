@@ -22,7 +22,7 @@ import TableOfContents from "@/components/TableOfContents.vue";
                         </div>
 
                         <div class="col-6" align="right">
-                            <RouterLink to="/docs/2-literals" class="text-decoration-none">Literals &#x00bb;</RouterLink>
+                            <RouterLink to="/docs/3-literals" class="text-decoration-none">Literals &#x00bb;</RouterLink>
                         </div>
                     </div>
                 </div>
