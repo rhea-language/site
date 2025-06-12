@@ -5,6 +5,8 @@ import Playground from "@/views/Playground.vue";
 import Download from "@/views/Download.vue";
 import Documentations from "@/views/Documentations.vue";
 import Installation from "@/views/docs/Installation.vue";
+import Literals from "@/views/docs/Literals.vue";
+import Expressions from "@/views/docs/Expressions.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +35,16 @@ const router = createRouter({
             path: "/docs/2-installation",
             name: "2-installation",
             component: Installation
+        },
+        {
+            path: "/docs/3-literals",
+            name: "3-literals",
+            component: Literals
+        },
+        {
+            path: "/docs/4-expressions",
+            name: "4-expressions",
+            component: Expressions
         }
     ],
 });
