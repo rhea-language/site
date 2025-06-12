@@ -52,5 +52,11 @@ import { RouterLink } from "vue-router";
             active-class="active"
             exact-active-class="active"
         >8 &mdash; Program Structure</RouterLink>
+        <RouterLink
+            to="/docs/9-use-cases"
+            class="btn btn-outline-primary text-start fw-bold"
+            active-class="active"
+            exact-active-class="active"
+        >9 &mdash; Use Cases</RouterLink>
     </div>
 </template>
